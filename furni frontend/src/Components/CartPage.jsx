@@ -4,20 +4,8 @@ import { Link } from "react-router-dom";
 import Hy from "./hy";
 
 function CartPage() {
-  let [cartData, setCartData] = useState([
-    {
-      pImage: "images/product-1.png",
-      pName: "Product 1",
-      pPrice: 49.00,
-      pQuantity: 10,
-    },
-    {
-      pImage: "images/product-2.png",
-      pName: "Product 2",
-      pPrice: 49.00,
-      pQuantity: 10,
-    },
-  ]);
+  let [cartData, setCartData] = useState(JSON.parse(localStorage.getItem("cartData"))||[]);
+  
   return (
     <>
       <div className="untree_co-section before-footer-section">
@@ -37,8 +25,8 @@ function CartPage() {
                     </tr>
                   </thead>
                   <tbody>
-                    {cartData.map((item,index)=>(
-                   <Hy item={item}/>
+                    {cartData.map((item, index) => (
+                      <Hy item={item} key={index} />
                     ))}
                   </tbody>
                 </table>
@@ -109,7 +97,7 @@ function CartPage() {
                     <div className="col-md-12">
                       <button
                         className="btn btn-black btn-lg py-3 btn-block"
-                        onclick="window.location='checkout.html'"
+                        onClick="window.location='checkout.html'"
                       >
                         <Link to="/checkout" className="text-white">
                           Proceed To Checkout
